@@ -1,0 +1,315 @@
+(1)
+class Main {
+  public static void main(String[] args) {
+
+	int h = 15;
+	int l = 9;
+	int a = h * l; //長方形面積
+
+		System.out.println(a);
+
+  }
+}
+
+
+
+//
+
+(2)
+class Main {
+  public static void main(String[] args) {
+
+	double l = 14.5;
+	double h =8.6;
+	double a = l * h; //長方形面積
+
+		System.out.println(a);
+
+  }
+}
+
+
+
+//
+
+class Main {
+  public static void main(String[] args) {
+	int r = 12;
+	double rr =3.1416;
+	double a = r * r * rr; //圓形面積
+
+		System.out.println(a);
+
+  }
+}
+
+
+
+//
+
+class Main {
+  public static void main(String[] args) {
+	int r = 12;
+	double rr =3.1416;
+	double a = r * r * Math.PI; //圓形面積
+
+		System.out.println(a);
+
+  }
+}
+
+
+
+//
+
+class Main {
+  public static void main(String[] args) {
+
+
+ System.out.println(12*12*Math.PI);
+
+  }
+}
+
+
+
+//
+
+class Main {
+  public static void main(String[] args) {
+
+	int l = 15;
+	int h = 9;
+	int a = (l+h) * 2; //長方形周長
+
+		System.out.println(a);
+
+  }
+}
+
+
+
+//
+
+class Main {
+  public static void main(String[] args) {
+
+	double l =8.5;
+	double h = 8.2;
+	double i = 7.4;
+
+		double a = (l+h+i)*4; //正方形周長
+
+			System.out.println(a);
+
+  }
+}
+
+
+
+//
+
+class Main {
+  public static void main(String[] args) {
+
+	int i = 15;
+	double j = 7.2;
+
+		double a = (i*i*Math.PI)-(j*j*Math.PI);  //大圓塗色面積(大圓-小圓)
+
+			System.out.println(a);
+
+  }
+}
+
+
+
+//
+
+
+class Main {
+  public static void main(String[] args) {
+
+	double l =8.5;
+	double h = 8.2;
+	double i = 7.4;
+
+		int a =(int)((l+h+i)*4); //小數轉換整數
+
+			System.out.println(a);
+
+  }
+}
+
+
+
+//
+
+(4)
+
+class Main {
+  public static void main(String[] args) {
+
+
+	Boolean i = true;
+	Boolean j =10<5;
+
+			System.out.println(i);
+			System.out.println(j);
+
+  }
+}
+
+
+//
+
+
+class Main {
+  public static void main(String[] args) {
+
+
+		int i =10;
+		int j = 2 *5;
+			boolean a = i != j;     //!=不等於
+				System.out.println(a);
+
+
+  }
+}
+
+
+
+//
+
+
+class Main {
+  public static void main(String[] args) {
+
+
+		float i =123;
+		float j = i;
+
+				System.out.println(j);
+
+
+  }
+}
+
+
+//
+
+
+class Main {
+  public static void main(String[] args) {
+
+	double i = Math.sqrt(15); //開根號
+		System.out.println(i);
+
+  }
+}
+
+
+//
+
+
+class Main {
+  public static void main(String[] args) {
+
+	int i =Math.abs(15);  //絕對值
+	int j =Math.abs(-15);
+
+		System.out.println(i);
+		System.out.println(j);
+
+  }
+}
+
+      //	int i , j;
+			i = Math.abs(15);
+			j = Math.abs(-15);
+
+				System.out.println(i);
+				System.out.println(j);
+
+
+//
+
+(3)
+
+class Main {
+  public static void main(String[] args) {
+
+ 	int i, j,a,aa;
+ 		i = 10;
+ 		j = 15;
+
+		a = Math.max(i,j);
+		aa = Math.min(i,j);
+
+			System.out.println(a); //印出較大
+			System.out.println(aa); //印出較小
+
+  }
+}
+
+(2)-1
+
+
+class Main {
+  public static void main(String[] args) {
+
+ 	double i,j,k;
+ 		i = 2.5;
+ 		j = 7.3;
+ 		k = 1.6;
+ 			System.out.println((int)i*j+k);
+
+
+
+  }
+}
+
+
+(2)-2
+
+
+class Main {
+  public static void main(String[] args) {
+
+ 	double i,j,k;
+ 		i = 2.5;
+ 		j = 7.3;
+ 		k = 1.6;
+ 			System.out.println(Math.ceil(i*j+k));
+
+
+
+  }
+}
+
+(2)-3
+
+
+class Main {
+  public static void main(String[] args) {
+
+ 	double i,j,k;
+ 		i = 2.5;
+ 		j = 7.3;
+ 		k = 1.6;
+ 			System.out.println(Math.round(i*j+k));
+
+
+
+  }
+}
+
+  //
+  
+class Main {
+  public static void main(String[] args) {
+
+ 			System.out.println(Math.round(2.5*7.3+1.6));
+
+  }
+}

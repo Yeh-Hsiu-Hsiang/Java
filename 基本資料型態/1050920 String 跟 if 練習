@@ -1,0 +1,242 @@
+class Main {
+  	public static void main(String[] args) {
+  		String s = "hello";
+    	System.out.println(s);
+  }
+}
+
+//
+
+import java.lang.*;
+
+
+class Main {
+  	public static void main(String[] args) {
+  		String s = "hello";
+  			String s2 = s.toUpperCase();
+  			String s3 = s.toLowerCase();
+
+    	System.out.println(s);
+    		System.out.println(s2);
+    		System.out.println(s3);
+  }
+}
+
+
+//
+
+import java.lang.*;
+
+
+class Main {
+  	public static void main(String[] args) {
+  		String s = "hello";
+  			String s2 = s.toUpperCase();
+  			String s3 = s.toLowerCase();
+  				int j = s.length();
+  					String i = s.substring(0,3);
+
+    	System.out.println(s);
+    		System.out.println(s2);
+    		System.out.println(s3);
+    			System.out.print(j);
+    				System.out.print(i);
+  }
+}
+
+
+//
+
+import java.lang.*;
+
+
+class Main {
+  	public static void main(String[] args) {
+  		String s = "hello";
+  		String ss = "How are you?";
+
+  		System.out.println(s+" "+ss);
+
+
+  }
+}
+
+
+//
+
+
+import java.lang.*;
+
+
+class Main {
+  	public static void main(String[] args) {
+  		String s = "hello";
+  		String ss = "How are you?";
+  		String a = s.concat(ss);
+
+  			System.out.println(a);
+
+
+  }
+}
+
+//
+
+import java.lang.*;
+
+
+class Main {
+  	public static void main(String[] args) {
+  		String s = "a123456789";
+  			System.out.println(s.toUpperCase().substring(0,5));
+
+
+
+  }
+}
+
+
+//
+
+import java.lang.*;
+
+
+class Main {
+  	public static void main(String[] args) {
+  		String s = "a123456789";
+
+  			System.out.println(s.toUpperCase().substring(s.length()-1,s.length()));
+
+
+
+  }
+}
+
+
+//
+
+  	import java.lang.*;
+
+
+class Main {
+  	public static void main(String[] args) {
+  	String F = "A123456789";
+  		String a = F.substring(1,2);
+  			if (a.equals("1"))
+  				System.out.println("男");
+  			if (a.equals("2"))
+  				System.out.println("女");
+
+
+  }
+}
+
+
+
+//
+
+import java.lang.*;
+
+
+class Main {
+  	public static void main(String[] args) {
+  		String F = "A123456789";
+  		String a = F.substring(1,2);
+  			if (a =="1")
+  				System.out.println("男");
+  			else
+  				System.out.println("女");
+
+
+  }
+}
+
+
+//
+
+
+import java.lang.*;
+
+
+class Main {
+  	public static void main(String[] args) {
+  	String F = "A823456789";
+  		String a = F.substring(1,2);
+
+  			if (a.equals("1"))
+  				System.out.println("男");
+  			else if (a.equals("2"))
+  				System.out.println("女");
+  	  		else
+  				System.out.println("輸入錯誤");
+
+
+
+  }
+}
+
+
+//
+
+import java.lang.*;
+
+
+class Main {
+  	public static void main(String[] args) {
+		String F = "F823456789";
+  		String a = F.toUpperCase().substring(0,1);
+
+  			if (a.equals("A"))
+  				System.out.println("台北市");
+  			else if (a.equals("F"))
+  				System.out.println("新北市");
+  			else if (a.equals("H"))
+  				System.out.println("桃園市");
+  	  		else
+  				System.out.println("其他縣市");
+
+  	  }
+}
+
+
+//
+
+import java.lang.*;
+
+
+class Main {
+  	public static void main(String[] args) {
+
+  		String a = "a123";
+  		int aa = a.length();
+
+  		if (aa<5)
+  				System.out.println("錯誤");
+  			else
+  				System.out.println("成功");
+
+
+  	  }
+}
+
+
+//
+
+
+import java.lang.*;
+
+
+class Main {
+  	public static void main(String[] args) {
+
+  		String a = "a123456789";
+  		int aa = a.length();
+
+  		if (aa<5)
+  				System.out.println("失敗");
+  			else if (aa>=5 && aa<=10)
+  				System.out.println("成功");
+
+
+  	  }
+}

@@ -1,0 +1,37 @@
+class Main {
+  public static void main(String[] args) {
+
+    double i = Math.sqrt(13);
+    	System.out.println(i);
+    	System.out.printf("結果:%7.4f\n",i);
+
+  }
+}
+
+//
+
+
+class Main {
+  public static void main(String[] args) {
+
+    double i = 10 * 10 * Math.PI;
+    	System.out.println(i);
+    	System.out.printf("結果:%7.2f\n", i);
+
+  }
+}
+
+//
+
+
+class Main {
+  public static void main(String[] args) {
+
+	double i = Math.pow(2,10);
+   		System.out.println(i);
+
+   		int j =(int)i;
+   			System.out.println(j);
+
+  }
+}

@@ -1,0 +1,43 @@
+(2)
+輸入向銀行的借款金額及預計還款的期數,
+假設每月循環利率為12%, 以複利計算.
+如果在預計還款的期數後一次還清本金及利息, 計算共要還多少錢?
+例如:
+向銀行借10000元, 一年後還(12期), 共應還38959.7599...元
+請分別輸出:(a)保留小數位數
+           (b)小數無條件捨去
+           (c)小數無條件進位
+           (d)四捨五入至整數位
+
+
+import java.util.*;
+class Main {
+    public static void main(String[] args) {
+        Scanner scanner=new Scanner(System.in);
+        double a, b, c;
+        
+        try{
+            System.out.print("請輸入本金:");
+            a=Double.parseDouble(scanner.next().trim());
+            
+System.out.print("請輸入利率:");
+            b=Double.parseDouble(scanner.next().trim()); 
+            
+            System.out.print("請輸入期數:");
+            c=Double.parseDouble(scanner.next().trim());
+            
+        }catch(Exception e){
+            System.out.println("資料輸入錯誤!");
+            return; }
+             
+         //---------------------------
+				
+		double ans = a*Math.pow(1.12,12);
+			System.out.println(ans);
+			System.out.println(Math.floor(ans*100)/100);        
+			System.out.println(Math.ceil(ans*100)/100);			
+			System.out.println(Math.round(ans));				
+		
+		//---------------------------
+    }
+}

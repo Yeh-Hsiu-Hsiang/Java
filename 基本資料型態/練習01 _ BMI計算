@@ -1,0 +1,33 @@
+練習01
+
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner k=new Scanner(System.in);
+        double height, weight;
+
+        try{
+            System.out.println("請輸入身高(公尺):");
+            height=Double.parseDouble(k.next().trim());
+
+            System.out.print("請輸入體重(公斤):");
+            weight=Double.parseDouble(k.next().trim());
+        }catch(Exception e){
+            System.out.println("資料輸入錯誤!");
+            return;
+        }
+
+        //---------------------------
+        // 你的程式加在以下的區間中
+        //---------------------------
+
+		double bmi = weight / Math.pow(height,2);
+			System.out.println(bmi);
+			System.out.println(Math.floor(bmi*100)/100);
+			System.out.println(Math.ceil(bmi*100)/100);
+		 	System.out.println(Math.round(bmi*100)/100.0);    <---.0使程式有小數位數--->
+
+        //---------------------------
+    }
+}

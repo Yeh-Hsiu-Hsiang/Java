@@ -1,0 +1,33 @@
+練習02
+
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner scanner=new Scanner(System.in);
+        double a, b, c;
+
+        try{
+            System.out.print("請輸入本金:");
+            a=Double.parseDouble(scanner.next().trim());
+
+            System.out.print("請輸入利率:");
+            b=Double.parseDouble(scanner.next().trim());
+
+            System.out.print("請輸入期數:");
+            c=Double.parseDouble(scanner.next().trim());
+
+        }catch(Exception e){
+            System.out.println("資料輸入錯誤!");
+            return;
+        }
+
+		double ans = a*Math.pow(1.12,12);
+			System.out.println(ans);
+			System.out.println(Math.floor(ans*100)/100);        //System.out.println(Math.floor(ans));
+			System.out.println(Math.ceil(ans*100)/100);			//System.out.println(Math.ceil(ans));
+			System.out.println(Math.round(ans));				//System.out.println(Math.round(ans));
+
+		//---------------------------
+    }
+}
