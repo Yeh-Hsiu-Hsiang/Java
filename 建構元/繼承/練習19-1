@@ -1,0 +1,170 @@
+(1)
+請再增加一個「特惠旅遊行程(SpecialTour)」繼承「旅遊行程」, 
+沒有增加成員, 但要改寫父親的 public int totalPrice(int, int) 方法,
+其計算費用方式: [大人及小孩單價乘以大人及小孩人數後的總金額, 再打對折優惠].
+
+依以下的「特惠旅遊行程」內容, 加印旅遊帳單:
+「林田山懷舊之旅」, 大人每人600元, 小孩每人350元.
+測試:
+2大2小: ________________________
+2大0小: ________________________
+4大4小: ________________________
+4大2小: ________________________
+
+
+class Tour{
+    private String title;     //行程名稱
+    private int priceAdult;   //大人費用
+    private int priceChild;   //小孩費用   
+    
+    //建構元(1)
+    public Tour(String title, int priceAdult, int priceChild){
+    	setTitle(title);
+    	setPriceAdult(priceAdult);
+    	setPriceChild(priceChild);
+    }
+    
+    //建構元(2)
+    public Tour(){
+    	setTitle(null);
+    	setPriceAdult(0);
+    	setPriceChild(0);
+    }
+    
+    //setters
+    public void setTitle(String title){this.title=title;}
+    public void setPriceAdult(int priceAdult){this.priceAdult=priceAdult;}
+    public void setPriceChild(int priceChild){this.priceChild=priceChild;}
+    
+    //getters
+    public String getTitle(){return this.title;}
+    public int getPriceAdult(){return this.priceAdult;}
+    public int getPriceChild(){return this.priceChild;}
+	
+    //計算總費用
+    public int totalPrice(int adult, int child){
+    	int total=priceAdult*adult + priceChild*child;
+    	
+    	if(total>5000){
+            total*=0.9;
+    	}else if(total>3000 && total<=5000){
+            total*=0.8;
+    	}
+    	
+    	return total;
+    }
+    
+    //印出帳單
+    public void print(int adult, int child){
+    	System.out.println("行程名稱:" + getTitle());
+    	System.out.println("大人費用:" + getPriceAdult());
+    	System.out.println("小孩費用:" + getPriceChild());
+    	System.out.println("大人人數:" + adult);
+    	System.out.println("小孩人數:" + child);
+    	System.out.println("總金額:" + totalPrice(adult, child));
+    	System.out.println("------------------------");
+    }
+}    
+
+
+//------------------------------------------------------------------------------------------
+//有導遊的旅遊行程
+class TourWithGuide extends Tour{
+    private int guide;   //導遊費用
+    
+    //建構元(1)
+    public TourWithGuide(String title, int priceAdult, int priceChild, int guide){
+    	super(title, priceAdult, priceChild);
+    	setGuide(guide);
+    }    
+    
+    //建構元(2)
+    public TourWithGuide(){
+    	super();
+    	setGuide(0);
+    }
+    
+    //setters
+    public void setGuide(int guide){
+    	this.guide=guide;
+    }
+
+    //getters
+    public int getGuide(){
+    	return this.guide;
+    }
+	
+    //計算總費用
+    @Override
+    public int totalPrice(int adult, int child){
+        int total=super.totalPrice(adult, child) + guide;		
+        return total;
+    }
+    
+    //印出帳單
+    @Override
+    public void print(int adult, int child){
+    	System.out.println("行程名稱:" + getTitle());
+    	System.out.println("大人費用:" + getPriceAdult());
+    	System.out.println("小孩費用:" + getPriceChild());
+    	System.out.println("大人人數:" + adult);
+    	System.out.println("小孩人數:" + child);
+    	System.out.println("導遊費用:" + getGuide());		
+    	System.out.println("總金額:" + totalPrice(adult, child));
+    	System.out.println("------------------------");
+    }
+}
+
+//特惠旅遊行程
+class SpecialTour extends Tour{
+    
+    //建構元(1)
+    public SpecialTour(String title, int priceAdult, int priceChild){
+    	super(title, priceAdult, priceChild);
+    }    
+    
+    //建構元(2)
+    public SpecialTour(){
+    	super();
+    }
+    
+    //計算總費用
+
+    public int totalPrice(int adult, int child){
+        int total=(int)(super.totalPrice(adult, child) * 0.5);		
+        return total; 
+	
+	//int total = super.totalPrice(adult, child) 
+	//return (int)(total * 0.5)
+    }
+
+}
+
+
+//------------------------------------------------------------------------------------------
+class Main{
+    public static void main(String args[]){
+        //產生一個旅遊行程
+        Tour t1=new Tour("花蓮慕谷慕魚生態一日遊", 1800, 800);
+        
+        t1.print(1, 0);
+        t1.print(2, 1);
+        t1.print(4, 4);
+        
+		
+        //產生一個有導遊的旅遊行程
+        TourWithGuide t2=new TourWithGuide("太魯閣白楊步道導覽", 2200, 1000, 1500);
+        
+        t2.print(2, 0);
+        t2.print(2, 2);
+        t2.print(4, 2);         
+    
+    //產生一個SpecialTour
+        SpecialTour t3=new SpecialTour("林田山懷舊之旅", 600, 350);
+        
+        t3.print(2, 2);
+        t3.print(2, 0);
+        t3.print(4, 4);
+        t3.print(4, 2);
+  }
+}

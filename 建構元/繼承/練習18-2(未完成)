@@ -1,0 +1,148 @@
+import java.util.ArrayList;
+
+//客戶, 抽象類別
+abstract class Customer{
+    private String phoneNo;     //手機號碼
+    private String name;        //姓名
+    private int minutes;        //本月通話分鐘數   
+    
+    //建構元(1)
+    public Customer(String phoneNo, String name, int minutes){
+    	setPhoneNo(phoneNo);
+    	setName(name);
+    	setMinutes(minutes);
+    }
+    
+    //建構元(2)
+    public Customer(){
+    	setPhoneNo(null);
+    	setName(null);
+    	setMinutes(0);
+    }
+    
+    //setters
+    public void setPhoneNo(String phoneNo){this.phoneNo=phoneNo;}
+    public void setName(String name){this.name=name;}
+    public void setMinutes(int minutes){this.minutes=minutes;}
+    
+    //getters
+    public String getPhoneNo(){return this.phoneNo;}
+    public String getName(){return this.name;}
+    public int setMinutes(){return this.minutes;}
+	
+    //列印通話費帳單, 抽象方法
+    abstract public void printBill();
+}    
+
+
+//------------------------------------------------------------------------------------------
+//月租型客戶
+class MonthlyCustomer extends Customer{
+    private int baseFee;      //月租費
+    private int freeMinutes;  //免費通話分鐘數
+   
+     //建構元(1)
+    public MonthlyCustomer(String phoneNo, String name, int minutes, int baseFee, int freeMinutes, int overmin, int total){
+    	super(phoneNo, name, minutes);
+    	setCost(baseFee);
+    	setFreemin(freeMinutes);
+    	setOvermin(overmin);
+    	setTotal(total);
+    }    
+    
+    //建構元(2)
+    public MonthlyCustomer(){
+    	super();
+    	setBaseFee(0);
+    	setFreeMinutes(0);
+    	setOvermin(0);
+    	setTotal(0);
+    }
+    
+    //setters
+    public void setBaseFee(int baseFee){this.baseFee=baseFee;}
+    public void setFreeMinutes(int freeMinutes){this.freeMinutes=freeMinutes;}
+    public void setOvermin(int overmin){this.overmin=overmin;}
+    public void setTotal(int total){this.total=total;}
+    
+    //getters
+    public int getBaseFee(){return this.baseFee;}
+    public int getFreeMinutes(){return this.freeMinutes;}
+	public int getOvermin(){
+		int overmin = 0;
+		
+		if(getminutes() < getminutes()){
+			overmin = 0;
+		}else{ 
+			overmin = 5.6 * getovermin;
+		}
+		
+		return this.overmin;
+		
+	}
+	public int getTotal(){
+		
+		int total = 0;
+		total = baseFee + Overmin;
+		return this.total;}
+	
+	
+     //列印通話費帳單
+    @Override
+    public void print(){
+    	System.out.println("手機號碼:" + this.getPhoneNo());  
+        System.out.println("姓名:" + this.getName()); 
+        System.out.println("本月通話分鐘數:" + this.getminutes());
+        System.out.println("月租費:" + this.getBaseFee()); 
+        System.out.println("免費通話分鐘數:" + this.getFreeMinutes()); 
+        System.out.println("超時通話費:" + this.getOvermin()); 
+        System.out.println("總費用:" + this.getTotal()); 
+        
+    }
+}
+
+
+
+//------------------------------------------------------------------------------------------
+//易付卡型客戶
+class MeteredCustomer extends Customer{
+    //建構元(1)
+    //建構元(2)
+    //列印通話費帳單
+}
+
+
+//------------------------------------------------------------------------------------------
+class Main{
+    public static void main(String args[]){
+        //一個可放客戶物件的串列清單
+        ArrayList customer = new ArrayList();
+        
+        //將多個「月租型客戶」物件加入串列清單中
+        customer.add(new MonthlyCustomer("0911-000-001", "龔小容", 55, 450, 60));
+        customer.add(new MonthlyCustomer("0911-000-002", "羅小綾", 135, 450, 60));
+        customer.add(new MonthlyCustomer("0911-000-003", "陳小如", 50, 350, 50));
+        customer.add(new MonthlyCustomer("0911-000-004", "陳小洋", 80, 350, 50));
+        customer.add(new MonthlyCustomer("0911-000-005", "張小慈", 100, 550, 80));        
+		
+
+        //將多個「易付卡型客戶」物件加入串列清單中
+        // customer.add(new MeteredCustomer("0922-000-001", "陳小嘉", 30));
+        // customer.add(new MeteredCustomer("0922-000-002", "羅小祐", 70));
+        // customer.add(new MeteredCustomer("0922-000-003", "商小珩", 20));
+        // customer.add(new MeteredCustomer("0922-000-004", "郭小伶", 15));
+        // customer.add(new MeteredCustomer("0922-000-005", "蔡小昱", 40));        
+		
+        //印出資料
+        for(int i=0; i<customer.size(); i++){
+            print((Customer)customer.get(i));
+        }
+    }
+	
+    //印出客戶帳單資料
+    public static void print(Customer cus){
+        cus.printBill();
+        System.out.println("-------------------------");
+    }
+}
+//------------------------------------------------------------------------------------------

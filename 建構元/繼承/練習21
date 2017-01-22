@@ -1,0 +1,227 @@
+import java.util.ArrayList;
+
+
+//---------------------
+//價格表(已完成)
+//---------------------
+class Price{
+    public static int shoesPrice=350;           //洗一雙鞋子價錢
+    public static int bootsPrice=450;           //洗一雙靴子價錢
+    public static int bagPrice=550;             //洗一個包包價錢
+    public static double discount=0.1;          //本月會員優惠折扣
+    public static double fastServicePrice=100;  //快速服務每件加收價錢	
+}
+
+
+//----------------------------
+//帳單(***未完成***)
+//----------------------------
+class Bill{
+    private String tel;           //客戶電話
+    private String customer;      //客戶姓名
+    private boolean fastService;  //是否快速取回服務  
+    
+     //建構元(1)
+    public Bill(String tel, String customer, boolean fastService){
+    	setTel(tel);
+    	setCustomer(customer);
+    	setFastService(fastService);
+    }
+    
+    //建構元(2)
+    public Bill(){
+    	setTel(null);
+    	setCustomer(null);
+    	setFastService(false);
+    }
+    
+    //setters
+    public void setTel(String tel){this.tel=tel;}
+    public void setCustomer(String customer){this.customer=customer;}
+    public void setFastService(boolean fastService){this.fastService=fastService;}
+    
+    //getters
+    public String getTel(){return this.tel;}
+    public String getCustomer(){return this.customer;}
+    public boolean getFastService(){return this.fastService;}
+}
+
+
+//----------------------------
+//會員帳單(***未完成***)
+//----------------------------
+class MemberBill extends Bill{
+    private int shoes;        //送洗鞋子數(雙)
+    private int boots;        //送洗靴子數(雙)
+    private int bags;         //送洗包包數(個)         
+	
+     //建構元(1)
+    public MemberBill(String tel, String customer, boolean fastService, int shoes, int boots, int bags){
+      super(tel, customer, fastService);
+    	setShoes(shoes);
+    	setBoots(boots);
+    	setBags(bags);
+    }
+    
+    //建構元(2)
+    public MemberBill(){
+      super();
+    	setShoes(0);
+    	setBoots(0);
+    	setBags(0);
+    }
+    
+    //setters
+    public void setShoes(int shoes){this.shoes=shoes;}
+    public void setBoots(int boots){this.boots=boots;}
+    public void setBags(int bags){this.bags=bags;}
+    
+    //getters
+    public int getShoes(){return this.shoes;}
+    public int getBoots(){return this.boots;}
+    public int getBags(){return this.bags;}
+	  
+	  public int fastServiceTotal(){
+	    int fastServiceTotal = 0;
+	    if(getFastService() == true){
+	      fastServiceTotal = (int)(Price.fastServicePrice * (getShoes() + getBoots() + getBags()));
+	    }
+	      return fastServiceTotal;
+	   }
+
+    
+    //列印帳單     //()不用回傳值
+    public void MemberBill(){   
+      
+      int shoesTotal = Price.shoesPrice * getShoes();
+	    int bootsTotal = Price.bootsPrice * getBoots();
+	    int bagTotal = Price.bagPrice * getBags();
+
+      //優惠前總金額
+      int totalBeforeDiscount =(int)(shoesTotal + bootsTotal + bagTotal + fastServiceTotal());
+      //會員折扣
+      int discount = (int)(totalBeforeDiscount * 0.1);
+      //折價後總金額
+      int total = (totalBeforeDiscount - discount);
+      
+      System.out.println("=========================");
+      System.out.println("會員帳單");
+      System.out.println("-------------------------");
+      System.out.println("電話: " + getTel());
+      System.out.println("姓名: " + getCustomer());
+      System.out.println("-------------------------");
+      System.out.println("洗鞋子總金額: " + shoesTotal);
+      System.out.println("洗靴子總金額: " + bootsTotal);
+      System.out.println("洗包包總金額: " + bagTotal);
+      System.out.println("快速取回服務: " + fastServiceTotal());
+      System.out.println("會員優惠折扣: " + discount);
+      System.out.println("-------------------------");
+      System.out.println("總金額:" + total);
+    }
+}
+
+
+//-----------------------------
+//非會員帳單(***未完成***)
+//-----------------------------
+class NonMemberBill extends Bill{
+    private int shoes;        //送洗鞋子數(雙)
+    private int boots;        //送洗靴子數(雙)
+    
+    //建構元(1)
+    public NonMemberBill(String tel, String customer, boolean fastService, int shoes, int boots){
+      super(tel, customer, fastService);
+    	setShoes(shoes);
+    	setBoots(boots);
+    }
+    
+    //建構元(2)
+    public NonMemberBill(){
+      super();
+    	setShoes(0);
+    	setBoots(0);
+    }
+    
+    //setters
+    public void setShoes(int shoes){this.shoes=shoes;}
+    public void setBoots(int boots){this.boots=boots;}
+    
+    //getters
+    public int getShoes(){return this.shoes;}
+    public int getBoots(){return this.boots;}
+
+    public int serverPrice(){
+      int serverPrice = 0;
+      if(getFastService() == true){
+        serverPrice = (int)(Price.fastServicePrice * (getShoes() + getBoots()));
+      }
+        return serverPrice;
+    }
+    
+    
+    
+    //列印帳單
+    public void printBill(){
+      int shoesTotal = getShoes() * Price.shoesPrice;
+      int BootsTotal = getBoots() * Price.bootsPrice;
+      int total = (shoesTotal + BootsTotal + serverPrice());
+      
+      System.out.println("=========================");
+      System.out.println("非會員帳單");
+      System.out.println("-------------------------");
+      System.out.println("電話: " + getTel());
+      System.out.println("姓名: " + getCustomer());
+      System.out.println("-------------------------");
+      System.out.println("洗鞋子總金額: " + shoesTotal);
+      System.out.println("洗靴子總金額: " + BootsTotal);
+      System.out.println("快速取回服務: " + serverPrice());
+      System.out.println("-------------------------");
+      System.out.println("總金額:" + total);
+    }
+  
+}
+
+
+//----------------------------
+//測試類別(已完成)
+//----------------------------
+class Main{
+    public static void main(String args[]){
+
+        //建立一個可存放多個物件的串列清單
+        ArrayList arrayList1 = new ArrayList();
+        
+        //將多個「會員帳單」物件加入串列清單中
+        arrayList1.add(new MemberBill("0911-111-111", "郭小伶", true, 1, 2, 3));
+        arrayList1.add(new MemberBill("0911-222-222", "蔡小昱", false, 0, 2, 2));
+        arrayList1.add(new MemberBill("0911-333-333", "楊小婷", true, 3, 5, 3));
+        arrayList1.add(new MemberBill("0911-444-444", "林小佑", false, 4, 8, 2));
+        arrayList1.add(new MemberBill("0911-555-555", "林小瑜", true, 0, 2, 0));        
+		
+        //列印會員帳單			
+        for(int i=0; i<arrayList1.size(); i++){            
+            MemberBill t = (MemberBill)arrayList1.get(i);   	
+            t.MemberBill();
+        }
+        
+
+        //..........................................
+		
+		    
+     //建立一個可存放多個物件的串列清單
+        ArrayList arrayList2 = new ArrayList();
+        
+        //將多個「非會員帳單」物件加入串列清單中
+        arrayList2.add(new NonMemberBill("0922-111-111", "林小彤", false, 1, 2));
+        arrayList2.add(new NonMemberBill("0922-222-222", "黃小翎", true, 0, 3));
+        arrayList2.add(new NonMemberBill("0922-333-333", "李小璋", false, 3, 0));
+        arrayList2.add(new NonMemberBill("0922-444-444", "吳小庭", true, 1, 5));
+        arrayList2.add(new NonMemberBill("0922-555-555", "林小瑾", false, 7, 6));        
+		
+        //列印非會員帳單	
+        for(int i=0; i<arrayList2.size(); i++){            	
+            NonMemberBill t = (NonMemberBill)arrayList2.get(i);             	
+            t.printBill();
+        } 
+    }
+}

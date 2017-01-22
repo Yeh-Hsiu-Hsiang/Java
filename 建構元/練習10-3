@@ -1,0 +1,62 @@
+(3)
+完成一個「員工」(Employee)類別,
+有以下成員:
+  (a)「員工姓名」(empName)
+  (b)「姓別」(gender)
+  (c)「本月加班時數」(overHours)   
+  (d)「銷售傭金比率」(commissionRate) 
+有以下方法:
+  (a) 建構元(傳入4個參數, 分別給4個成員)
+  (b) 四個getter方法, 分別取出四個成員值.
+  
+測試:
+  建立二個員工類別的物件, 完成後分別取出及印出成員內容:
+  (a)「周大君」、「M」、「25」、「0.12」
+  (b)「李大文」、「F」、「12」、「0.08」  
+
+
+class Employee {
+    private String empName;
+    private char gender;
+    private double overHours;
+    private double commissionRate;
+
+
+    //建構元
+    public Employee(String empName, char gender, double overHours, double commissionRate){
+        this.empName=empName;
+        this.gender=gender;
+        this.overHours=overHours;
+        this.commissionRate=commissionRate;
+    }
+  
+    
+    //設定成員的setter
+    public void setEmpName(String empName){this.empName=empName;}
+    public void setGender(char gender){this.gender=gender;}
+    public void setItem(double overHours){this.overHours=overHours;}
+    public void setAmount(double commissionRate){this.commissionRate=commissionRate;}
+        
+    
+    public String getempName(){return this.empName;}
+    public char getgender(){return this.gender;}
+    public double getoverHours(){return this.overHours;}
+    public double getcommissionRate(){return this.commissionRate;}
+}
+
+
+class Main{
+    public static void main(String args[]){
+        Employee s=new Employee("周大君",'M', 25,0.12);
+			System.out.println(s.getempName()); 
+        	System.out.println(s.getgender());
+        	System.out.println(s.getoverHours());
+        	System.out.println(s.getcommissionRate());
+   		 
+   		 Employee ss=new Employee("李大文",'F', 12,0.08);
+			System.out.println(ss.getempName()); 
+        	System.out.println(ss.getgender());
+        	System.out.println(ss.getoverHours());
+        	System.out.println(ss.getcommissionRate());
+    }
+}

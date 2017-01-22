@@ -1,0 +1,62 @@
+(2)
+完成一個「交易」(Transaction)類別,
+有以下成員:
+  (a)「交易日期」(date)    (*本欄位請用字串儲存)
+  (b)「客戶姓名」(cusName)
+  (c)「商品名稱」(item)   
+  (d)「購買數量」(amount) 
+有以下方法:
+  (a) 建構元(傳入4個參數, 分別給4個成員)
+  (b) 四個getter方法, 分別取出四個成員值.
+  
+測試:
+  建立二個交易類別的物件, 完成後分別取出及印出成員內容:
+  (a)「2016-10-15」、「王小明」、「手機保護貼」、「200」
+  (b)「2016-10-16」、「陳小華」、「平板皮套」、「150」
+
+
+class Transaction {
+    private String date;
+    private String cusName;
+    private String item;
+    private int amount;
+
+
+    //建構元
+    public Transaction(String date, String cusName, String item, int amount){
+        this.date=date;
+        this.cusName=cusName;
+        this.item=item;
+        this.amount=amount;
+    }
+  
+    
+    //設定成員的setter
+    public void setDate(String date){this.date=date;}
+    public void setCusName(String cusName){this.cusName=cusName;}
+    public void setItem(String item){this.item=item;}
+    public void setAmount(int amount){this.amount=amount;}
+        
+    
+    public String getdate(){return this.date;}
+    public String getcusName(){return this.cusName;}
+    public String getitem(){return this.item;}
+    public int getamount(){return this.amount;}
+}
+
+
+class Main{
+    public static void main(String args[]){
+        Transaction s=new Transaction("2016-10-15","王小明", "手機保護貼",200);
+			System.out.println(s.getdate()); 
+        	System.out.println(s.getcusName());
+        	System.out.println(s.getitem());
+        	System.out.println(s.getamount());
+   		 
+   		 Transaction ss=new Transaction("2016-10-16","陳小華", "平板皮套",150);
+			System.out.println(ss.getdate()); 
+        	System.out.println(ss.getcusName());
+        	System.out.println(ss.getitem());
+        	System.out.println(ss.getamount());
+    }
+}

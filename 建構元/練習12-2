@@ -1,0 +1,122 @@
+練習12-(2)
+完成一個「學生」(Student)類別,
+有以下成員:
+  (a)「學號」(stuNo)
+  (b)「姓名」(stuName)
+  (c)「年級」(grade)
+有以下方法:
+  (a) 建構元(傳入3個參數, 分別給3個成員)
+  (b) 建構元(無傳入參數)
+  (c) 三個setter方法, 分別設定三個成員值.
+  (d) 三個getter方法, 分別取出三個成員值.
+  
+方法說明:
+  (a) 學號有8碼 而且 第1碼是「1」, 若不符合則填入空值「null」
+  (b) 年級為「1」~「5」, 若不符合則填入「0」  
+  
+測試:
+  建立四個學生類別的物件, 完成後分別取出及印出成員內容:
+  (a)「10456001」、「王小明」、「2」
+  (b)「10556001」、「陳小華」、「1」
+  (c)「103560012」、「周小文」、「3」
+  (d)「10256004」、「李小惠」、「8」  
+  
+註: 第1及3個物件由建構元設定成員值, 第2及4個物件由setter設定成員值.
+
+
+class Student {
+    private String stuNo;
+    private String stuName;
+    private char grade;
+
+
+    //建構元(1)
+    public Student(String stuNo, String stuName, char grade){
+        this.setStuNo(stuNo);
+        this.setStuName(stuName);
+        this.setGender(grade);
+        
+    }
+    
+    //建構元(2)
+    public Student(){
+        this.stuNo=null;
+        this.stuName=null;
+        this.grade='\u0000';	
+    }
+
+
+    //設定成員的setter
+    public void setStuNo(String stuNo){
+    	if(stuNo.length()!=8 || stuNo.charAt(0)!='1'){
+    		this.stuNo=null;
+    	}else{
+    		this.stuNo=stuNo;
+    	}
+    	
+    }
+    public void setStuName(String stuName){this.stuName=stuName;}
+    public void setGender(char grade){
+        if(grade!='1' && grade!='2' && grade!='3' && grade!='4' && grade!='5'){
+        	this.grade='0';
+        }else{
+            this.grade=grade;
+        }
+    }    
+    
+    //取出成員的getter
+    public String getStuNo(){return this.stuNo;}
+    public String getStuName(){return this.stuName;}
+    public char getGrade(){return this.grade;}
+
+
+}
+
+
+//------------------------------
+
+
+class Main{
+    public static void main(String args[]){
+    	//第一種設定成員值的方式
+        Student s1=new Student("10456001", "王小明", '2');
+				
+        System.out.println(s1.getStuNo()); 
+        System.out.println(s1.getStuName());
+        System.out.println(s1.getGrade());
+
+
+        
+        //第二種設定成員值的方式        
+        Student s2=new Student();
+        
+        s2.setStuNo("10556001");
+        s2.setStuName("陳小華");
+        s2.setGender('1');
+		
+        System.out.println(s2.getStuNo()); 
+        System.out.println(s2.getStuName());
+        System.out.println(s2.getGrade());
+      
+      Student s3=new Student("103560012", "周小文", '3');
+				
+        System.out.println(s3.getStuNo()); 
+        System.out.println(s3.getStuName());
+        System.out.println(s3.getGrade());
+
+
+		Student s4=new Student("10256004", "李小惠", '8');
+				
+        System.out.println(s4.getStuNo()); 
+        System.out.println(s4.getStuName());
+        System.out.println(s4.getGrade());
+
+
+		
+      
+    }
+}
+
+
+
+

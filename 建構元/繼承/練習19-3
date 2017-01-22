@@ -1,0 +1,352 @@
+(3)
+撰寫一個「住宿旅遊行程(HotelTour)」, 由它繼承「旅遊行程」.
+增加 2 個成員, 「單人房房費(int singleRoomPrice)」及「雙人房房費(int doubleRoomPrice)」.
+成員值可由 建構元 或 setter 設定, 也可由 getter 取出.
+
+再增加一個 public int totalPrice(int, int, int, int, boolean) 方法計算總費用,
+傳入的參數分別是「大人人數」, 「小孩人數」, 「單人房數」, 「雙人房數」, 「是否升等豪華房型」.
+若升等豪華房型, 加收升等費用, 其為原房間費用的 20%.
+本活動無優惠折扣.
+
+亦增加一個 public void print(int, int, int, int, boolean), 參數意義與計算總費用方法相同.
+印出帳單資訊, 帳單範例如下:
+---------------------------------------
+行程名稱:********
+大人費用:*****
+小孩費用:*****
+大人人數:***
+小孩人數:***
+總金額:*****
+
+單人房房費:*****
+雙人房房費:*****
+單人房數:***
+雙人房數:***
+總金額:*****
+升等費用:******
+
+合計金額:*******
+---------------------------------------
+
+依以下的「單車旅遊行程」內容, 加印旅遊帳單:
+「六十石山金針花海行」, 大人每人800元, 小孩每人550元, 單人房房費1250元, 雙人房房費2250元.
+測試:
+3大2小, 1單人2雙人: ________________________
+2大1小, 1單人1雙人: ________________________
+4大4小, 0單人4雙人: ________________________
+6大2小, 6單人1雙人: ________________________
+
+class Tour{
+    private String title;     //行程名稱
+    private int priceAdult;   //大人費用
+    private int priceChild;   //小孩費用   
+    
+    //建構元(1)
+    public Tour(String title, int priceAdult, int priceChild){
+    	setTitle(title);
+    	setPriceAdult(priceAdult);
+    	setPriceChild(priceChild);
+    }
+    
+    //建構元(2)
+    public Tour(){
+    	setTitle(null);
+    	setPriceAdult(0);
+    	setPriceChild(0);
+    }
+    
+    //setters
+    public void setTitle(String title){this.title=title;}
+    public void setPriceAdult(int priceAdult){this.priceAdult=priceAdult;}
+    public void setPriceChild(int priceChild){this.priceChild=priceChild;}
+    
+    //getters
+    public String getTitle(){return this.title;}
+    public int getPriceAdult(){return this.priceAdult;}
+    public int getPriceChild(){return this.priceChild;}
+	
+    //計算總費用
+    public int totalPrice(int adult, int child){
+    	int total=priceAdult*adult + priceChild*child;
+    	
+    	if(total>5000){
+            total*=0.9;
+    	}else if(total>3000 && total<=5000){
+            total*=0.8;
+    	}
+    	
+    	return total;
+    }
+    
+    //印出帳單
+    public void print(int adult, int child){
+    	System.out.println("行程名稱:" + getTitle());
+    	System.out.println("大人費用:" + getPriceAdult());
+    	System.out.println("小孩費用:" + getPriceChild());
+    	System.out.println("大人人數:" + adult);
+    	System.out.println("小孩人數:" + child);
+    	System.out.println("總金額:" + totalPrice(adult, child));
+    	System.out.println("------------------------");
+    }
+}    
+
+
+//------------------------------------------------------------------------------------------
+//有導遊的旅遊行程
+class TourWithGuide extends Tour{
+    private int guide;   //導遊費用
+    
+    //建構元(1)
+    public TourWithGuide(String title, int priceAdult, int priceChild, int guide){
+    	super(title, priceAdult, priceChild);
+    	setGuide(guide);
+    }    
+    
+    //建構元(2)
+    public TourWithGuide(){
+    	super();
+    	setGuide(0);
+    }
+    
+    //setters
+    public void setGuide(int guide){
+    	this.guide=guide;
+    }
+
+    //getters
+    public int getGuide(){
+    	return this.guide;
+    }
+	
+    //計算總費用
+    @Override
+    public int totalPrice(int adult, int child){
+        int total=super.totalPrice(adult, child) + guide;		
+        return total;
+    }
+    
+    //印出帳單
+    @Override
+    public void print(int adult, int child){
+    	System.out.println("行程名稱:" + getTitle());
+    	System.out.println("大人費用:" + getPriceAdult());
+    	System.out.println("小孩費用:" + getPriceChild());
+    	System.out.println("大人人數:" + adult);
+    	System.out.println("小孩人數:" + child);
+    	System.out.println("導遊費用:" + getGuide());		
+    	System.out.println("總金額:" + totalPrice(adult, child));
+    	System.out.println("------------------------");
+    }
+}
+
+//特惠旅遊行程
+class SpecialTour extends Tour{
+    
+    //建構元(1)
+    public SpecialTour(String title, int priceAdult, int priceChild){
+    	super(title, priceAdult, priceChild);
+    }    
+    
+    //建構元(2)
+    public SpecialTour(){
+    	super();
+    }
+    
+    //計算總費用
+
+    public int totalPrice(int adult, int child){
+        int total=(int)(super.totalPrice(adult, child) * 0.5);		
+        return total;
+    }
+
+}
+
+//單車旅遊行程(BikeTour)
+
+class BikeTour extends Tour{
+  private int adultBikePrice; //大人單車租金
+  private int childBikePrice; //小孩單車租金
+  
+    //建構元(1)
+    public BikeTour(String title, int priceAdult, int priceChild, int adultBikePrice, int childBikePrice){
+    	super(title, priceAdult, priceChild);
+    	setAdultBikePrice(adultBikePrice);
+    	setChildBikePrice(childBikePrice);
+    }    
+    
+    //建構元(2)
+    public BikeTour(){
+    	super();
+    	setAdultBikePrice(0);
+    	setChildBikePrice(0);
+    }
+    
+    //setters
+    public void setAdultBikePrice(int adultBikePrice){
+    	this.adultBikePrice=adultBikePrice;
+    }
+    public void setChildBikePrice(int childBikePrice){
+    	this.childBikePrice=childBikePrice;
+    }
+
+    //getters
+    public int getAdultBikePrice(){
+    	return this.adultBikePrice;
+    }
+    public int getChildBikePrice(){
+      return this.childBikePrice;
+    }
+    
+    
+    //計算總費用
+    public int biketotal(int adultBike, int childBike){
+      int biketotal = (adultBike * adultBikePrice) + (childBike * childBikePrice);
+      return biketotal;
+    }
+    public int totalPrice(int adult, int child, int adultBike, int childBike){
+        int total=super.totalPrice(adult, child) + biketotal(adultBike,childBike);		
+        return total;
+    }
+
+    public void print(int adult, int child, int adultBike, int childBike){
+    	System.out.println("行程名稱:" + getTitle());
+    	System.out.println("大人費用:" + getPriceAdult());
+    	System.out.println("小孩費用:" + getPriceChild());
+    	System.out.println("大人人數:" + adult);
+    	System.out.println("小孩人數:" + child);
+		  System.out.println("總金額:" + totalPrice(adult, child));
+		  
+		  System.out.println("大人單車每台租金:" + getPriceAdult());
+		  System.out.println("小孩單車每台租金:" + getPriceChild());
+		  System.out.println("大人單車數:" + adultBike);
+		  System.out.println("小孩單車數:" + childBike);
+		  System.out.println("總金額:" + biketotal(adultBike,childBike));
+    	System.out.println("合計金額:" + totalPrice(adult, child,adultBike, childBike));
+    
+      System.out.println("------------------------");
+      
+    }
+
+}
+//房費(HotelTour)
+
+class HotelTour extends Tour{
+  private int singleRoomPrice; //單人房
+  private int doubleRoomPrice; //雙人房
+  
+    //建構元(1)
+    public HotelTour(String title, int priceAdult, int priceChild, int singleRoomPrice, int doubleRoomPrice){
+    	super(title, priceAdult, priceChild);
+    	setSingleRoomPrice(singleRoomPrice);
+    	setDoubleRoomPrice(doubleRoomPrice);
+    }    
+    
+    //建構元(2)
+    public HotelTour(){
+    	super();
+    	setSingleRoomPrice(0);
+    	setDoubleRoomPrice(0);
+    }
+    
+    //setters
+    public void setSingleRoomPrice(int singleRoomPrice){
+    	this.singleRoomPrice=singleRoomPrice;
+    }
+    public void setDoubleRoomPrice(int doubleRoomPrice){
+    	this.doubleRoomPrice=doubleRoomPrice;
+    }
+
+    //getters
+    public int getSingleRoomPrice(){
+    	return this.singleRoomPrice;
+    }
+    public int getDoubleRoomPrice(){
+      return this.doubleRoomPrice;
+    }
+    
+    
+    //計算總費用
+    public int hoteltotal(int singleRoom, int doubleRoom){
+      int hoteltotal = (singleRoom * singleRoomPrice) + (doubleRoom * doubleRoomPrice);
+      return hoteltotal;
+    }
+    
+    public int upPrice(int singleRoom, int doubleRoom, boolean level){
+      int upPrice;
+      if(level == true){
+        upPrice =(int)((singleRoom * singleRoomPrice + doubleRoom * doubleRoomPrice )* 0.2);
+      }else{
+        upPrice = 0;
+      }
+      return upPrice;
+    }
+    
+    public int totalPrice(int adult, int child, int singleRoom, int doubleRoom, boolean level){
+      int total=super.totalPrice(adult, child) + hoteltotal(singleRoom,doubleRoom) + upPrice(singleRoom, doubleRoom, level);
+      return total;
+    }
+
+    public void print(int adult, int child, int singleRoom , int doubleRoom, boolean level){
+    	System.out.println("行程名稱:" + getTitle());
+    	System.out.println("大人費用:" + getPriceAdult());
+    	System.out.println("小孩費用:" + getPriceChild());
+    	System.out.println("大人人數:" + adult);
+    	System.out.println("小孩人數:" + child);
+		  System.out.println("總金額:" + totalPrice(adult, child));
+		  
+		  System.out.println("單人房房費:" + getSingleRoomPrice());
+		  System.out.println("雙人房房費:" + getDoubleRoomPrice());
+		  System.out.println("單人房數:" + singleRoom);
+		  System.out.println("雙人房數:" + doubleRoom);
+		  System.out.println("總金額:" + hoteltotal(singleRoom,doubleRoom));
+		  System.out.println("升等費用:" + upPrice(singleRoom,doubleRoom, level));
+		  
+    	System.out.println("合計金額:" + totalPrice(adult, child, singleRoom, doubleRoom, level));
+    
+      System.out.println("------------------------");
+      
+    }
+}
+//------------------------------------------------------------------------------------------
+class Main{
+    public static void main(String args[]){
+        //產生一個旅遊行程
+        Tour t1=new Tour("花蓮慕谷慕魚生態一日遊", 1800, 800);
+        
+        t1.print(1, 0);
+        t1.print(2, 1);
+        t1.print(4, 4);
+        
+		
+        //產生一個有導遊的旅遊行程
+        TourWithGuide t2=new TourWithGuide("太魯閣白楊步道導覽", 2200, 1000, 1500);
+        
+        t2.print(2, 0);
+        t2.print(2, 2);
+        t2.print(4, 2);         
+    
+    //產生一個特別的旅遊行程
+        SpecialTour t3=new SpecialTour("林田山懷舊之旅", 600, 350);
+        
+        t3.print(2, 2);
+        t3.print(2, 0);
+        t3.print(4, 4);
+        t3.print(4, 2);
+        
+    //產生一個計算單車租金的旅遊行程
+        BikeTour t4=new BikeTour("池上-關山縱谷單車行", 400, 250, 250, 200);
+        
+        t4.print(3, 2, 3, 2);
+        t4.print(2, 1, 2, 0);
+        t4.print(4, 4, 2, 2);
+        t4.print(6, 2, 6, 1);
+        
+    ////產生一個計房費
+        HotelTour t5=new HotelTour("六十石山金針花海行", 800, 550, 1250, 2250);
+        
+        t5.print(3, 2, 1, 2, true);
+        t5.print(2, 1, 1, 1, true);
+        t5.print(4, 4, 0, 4, false);
+        t5.print(6, 2, 6, 1, false);
+  }
+}

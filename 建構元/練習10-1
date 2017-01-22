@@ -1,0 +1,56 @@
+(1)
+完成一個「客戶」(Customer)類別,
+有以下成員:
+  (a)「客戶姓名」(cusName)
+  (b)「電話號碼」(tel)
+  (c)「地址」(address)   
+有以下方法:
+  (a) 建構元(傳入3個參數, 分別給3個成員)
+  (b) 三個getter方法, 分別取出三個成員值.
+  
+測試:
+  建立二個客戶類別的物件, 完成後分別取出及印出成員內容:
+  (a)「王小明」、「0911-111-111」、「台北市中正區和平東路一段40號1樓」
+  (b)「陳小華」、「0911-222-222」、「新北市板橋區中山路三段5巷60號4樓」
+
+
+class Customer {
+    private String cusName;
+    private String cusTel;
+    private String cusAddress;
+
+
+    //建構元
+    public Customer(String cusName, String cusTel, String cusAddress){
+        this.cusName=cusName;
+        this.cusTel=cusTel;
+        this.cusAddress=cusAddress;
+    }
+      
+    //設定成員的setter
+    public void setCusName(String cusName){this.cusName=cusName;}
+    public void setCusTel(String cusTel){this.cusTel=cusTel;}
+    public void setCusAddress(String cusTel){this.cusTel=cusTel;}
+            
+    public String getCusName(){return this.cusName;}
+    public String getCusTel(){return this.cusTel;}
+    public String getCusAddress(){return this.cusAddress;}
+}
+
+
+
+
+class Main{
+    public static void main(String args[]){
+        Customer s=new Customer("王小明","0911-111-111", "台北市中正區和平東路一段40號1樓");
+			System.out.println(s.getCusName()); 
+        	System.out.println(s.getCusTel());
+        	System.out.println(s.getCusAddress());
+		
+		Customer ss=new Customer("陳小華","0911-222-222","新北市板橋區中山路三段5巷60號4樓");
+		
+   			System.out.println(ss.getCusName()); 
+        	System.out.println(ss.getCusTel());
+        	System.out.println(ss.getCusAddress());
+    }
+}
