@@ -1,0 +1,208 @@
+import java.util.ArrayList;
+
+
+//----------------------------
+//攝影活動(已完成)
+//----------------------------
+class Activity{
+    //日期時間
+    public static String dateTime = "2017-1-13(五) 19:00~21:00";   
+	
+    //課程內容
+    public static String content  = "中正紀念堂夜拍(Camera night shot tutorial)";          
+	
+    //集合地點 
+    public static String gatherPlace = "捷運中正紀念堂站一號出口(MRT CKS Memorial Hall)"; 
+	
+    //每人費用
+    public static int pricePerPerson = 500;                       
+	
+    //租一台照機價格
+    public static int rentOneCameraPrice = 300;                   
+}
+
+
+//----------------------------
+//報名(***未完成***)
+//----------------------------
+class SignUp{
+  private String tel;      //電話
+	private String name;     //報名姓名
+	
+    //建構元(1)
+    public SignUp(String tel, String name){
+    	setTel(tel);
+    	setName(name);
+    }
+    
+    //建構元(2)
+    public SignUp(){
+    	setTel(null);
+    	setName(null);
+    }
+    
+    //setters
+    public void setTel(String tel){this.tel=tel;}
+    public void setName(String name){this.name=name;}
+    
+    //getters
+    public String getTel(){return this.tel;}
+    public String getName(){return this.name;}
+}
+
+
+
+
+//----------------------------
+//個人報名(***未完成***)
+//----------------------------
+class SingleSignUp extends SignUp{
+    private boolean isRentCamera;   //是否租用相機     
+    
+	  //建構元(1)
+    public SingleSignUp(String tel, String name, boolean isRentCamera){
+      super(tel, name);
+    	
+    	setIsRentCamera(isRentCamera);
+    }
+    
+    //建構元(2)
+    public SingleSignUp(){
+      super();
+    	setIsRentCamera(false);
+    }
+    
+    //setters
+    public void setIsRentCamera(boolean isRentCamera){this.isRentCamera=isRentCamera;}
+    
+    //getters
+    public boolean getIsRentCamera(){return this.isRentCamera;}
+	  
+	  public int camera(){
+	    int camera = 0;
+	     if(getIsRentCamera() == true){
+        camera = Activity.rentOneCameraPrice;
+      }
+	      return camera;
+	   }
+
+    //列印報名資訊
+    public void printInfo(){
+      System.out.println("============================================================");
+      System.out.println("個人報名(SingleSignUp)");
+      System.out.println("============================================================");
+      System.out.println("日期時間: " + Activity.dateTime);
+      System.out.println("課程內容: " + Activity.content);
+      System.out.println("集合地點: " + Activity.gatherPlace);
+      System.out.println("------------------------------------------------------------");
+      System.out.println("電話: " + getTel());
+      System.out.println("姓名: " + getName());
+      System.out.println("------------------------------------------------------------");
+      System.out.println("參加費用: " + Activity.pricePerPerson);
+      System.out.println("租用相機: " + camera());
+      System.out.println("------------------------------------------------------------	");
+      
+      int total = camera() + Activity.pricePerPerson;
+      
+      System.out.println("總金額: " + total);
+      System.out.println("============================================================");
+    }
+}
+
+//-----------------------------
+//團體報名(***未完成***)
+//-----------------------------
+class GroupSignUp extends SignUp{
+    private int numberOfPeople;      //參加人數
+    private int numberOfRentCamera;  //租用相機台數	
+    
+//建構元(1)
+    public GroupSignUp(String tel, String name, int numberOfPeople, int numberOfRentCamera){
+      super(tel, name);
+    	setNumberOfPeople(numberOfPeople);
+    	setNumberOfRentCamera(numberOfRentCamera);
+    }
+    
+    //建構元(2)
+    public GroupSignUp(){
+      super();
+    	setNumberOfPeople(0);
+    	setNumberOfRentCamera(0);
+    }
+    
+    //setters
+    public void setNumberOfPeople(int numberOfPeople){this.numberOfPeople=numberOfPeople;}
+    public void setNumberOfRentCamera(int numberOfRentCamera){this.numberOfRentCamera=numberOfRentCamera;}
+    
+    //getters
+    public int getNumberOfPeople(){return this.numberOfPeople;}
+    public int getNumberOfRentCamera(){return this.numberOfRentCamera;}
+	  
+    //列印報名資訊
+    public void printInfo(){
+      System.out.println("============================================================");
+      System.out.println("團體報名(GroupSignUp)");
+      System.out.println("============================================================");
+      System.out.println("日期時間: " + Activity.dateTime);
+      System.out.println("課程內容: " + Activity.content);
+      System.out.println("集合地點: " + Activity.gatherPlace);
+      System.out.println("------------------------------------------------------------");
+      System.out.println("電話: " + getTel());
+      System.out.println("姓名: " + getName());
+      System.out.println("------------------------------------------------------------");
+      int PeopleTotal = getNumberOfPeople() * Activity.pricePerPerson;
+      int CameraTotal = getNumberOfRentCamera() * Activity.rentOneCameraPrice;
+      int total = PeopleTotal + CameraTotal;
+      
+      
+      System.out.println("參加人數: " + getNumberOfPeople());
+      System.out.println("參加費用: " + PeopleTotal);
+      System.out.println("租相機數: " + getNumberOfRentCamera());
+      System.out.println("租用相機: " + CameraTotal);
+      System.out.println("------------------------------------------------------------	");
+      System.out.println("總金額: " + total);
+      System.out.println("============================================================");
+    }
+}
+
+//----------------------------
+//測試類別(已完成)
+//----------------------------
+class Main{
+    public static void main(String args[]){
+        //建立一個可存放多個物件的串列清單
+        ArrayList arrayList1 = new ArrayList();
+        
+        //將多個「個人報名」物件加入串列清單中
+        arrayList1.add(new SingleSignUp("0911-111-111", "郭小伶", true));
+        arrayList1.add(new SingleSignUp("0911-222-222", "蔡小昱", true));
+        arrayList1.add(new SingleSignUp("0911-333-333", "楊小婷", false));
+       
+		
+        //列印報名資訊			
+        for(int i=0; i<arrayList1.size(); i++){            
+            SingleSignUp t = (SingleSignUp)arrayList1.get(i);                                  	
+            t.printInfo();
+        }
+        
+		
+        //..........................................
+		
+		
+        //建立一個可存放多個物件的串列清單
+        ArrayList arrayList2 = new ArrayList();
+        
+        //將多個「團體報名」物件加入串列清單中
+        arrayList2.add(new GroupSignUp("0922-111-111", "林小彤", 3, 2));
+        arrayList2.add(new GroupSignUp("0922-222-222", "黃小翎", 2, 0));
+        arrayList2.add(new GroupSignUp("0922-333-333", "李小璋", 4, 4));
+      
+		
+        //列印報名資訊	
+        for(int i=0; i<arrayList2.size(); i++){            	
+            GroupSignUp t = (GroupSignUp)arrayList2.get(i);             	
+            t.printInfo();
+        } 
+    }
+}
+//------------------------------------------------------------------------------------------

@@ -1,0 +1,129 @@
+//------------------------------------------------------------------------------------------
+import java.util.*;
+
+
+//-----------------------------------------------
+// 一般咨詢24小時內回覆; 特別咨詢2小時內回覆.
+//-----------------------------------------------
+class Service{
+    public static int perDiagnosis = 100;         //一般咨詢每次費用
+    public static int perSpecialDiagnosis = 250;  //特別咨詢每次費用
+    public static double memberDiscount = 0.2;    //會員折扣
+}
+
+
+//-----------------------------------------------
+// 可列印介面(已完成)
+//-----------------------------------------------
+interface Printable{
+    public void printBill();
+}
+
+//-----------------------------------------------
+// 咨詢類別
+//-----------------------------------------------
+class Appointment implements Printable{
+  private String name;                   //客戶姓名
+  private int numberOfDiagnosis;         //咨詢次數
+  private boolean isSpecialAppointment;  //是否特別咨詢
+	private boolean isMember;              //是否會員
+	
+ //建構元(1)
+    public Appointment(String name, int numberOfDiagnosis, boolean isSpecialAppointment, boolean isMember){
+        this.name=name;
+        this.numberOfDiagnosis=numberOfDiagnosis;
+        this.isSpecialAppointment=isSpecialAppointment;
+        this.isMember=isMember;
+    }
+
+    //建構元(2)    
+    public Appointment(){
+        this.name=null;
+        this.numberOfDiagnosis=0;
+        this.isSpecialAppointment=false;
+        this.isMember=false;
+    }
+	
+    //setter
+    public void setName(String name){this.name=name;}
+    public void setNumberOfDiagnosis(int numberOfDiagnosis){this.numberOfDiagnosis=numberOfDiagnosis;}
+    public void setIsSpecialAppointment(boolean isSpecialAppointment){this.isSpecialAppointment=isSpecialAppointment;}
+    public void setIsMember(boolean isMember){this.isMember=isMember;}
+    
+    //getter
+    public String getName(){return this.name;}
+    public int getNumberOfDiagnosis(){return this.numberOfDiagnosis;}
+    public boolean getIsSpecialAppointment(){return this.isSpecialAppointment;}
+    public boolean getIsMember(){return this.isMember;}
+    
+
+    
+    //印出帳單
+    @Override    
+    public void printBill(){
+      System.out.println("=========================");
+      System.out.println("帳單");
+      System.out.println("-------------------------");
+      System.out.println("姓名: " + getName());
+      System.out.println("咨詢次數: " + getNumberOfDiagnosis());
+      
+      String special;
+      if(getIsSpecialAppointment() == true){
+        special = "是";
+      }else{
+        special = "不是";
+      }
+      
+      
+    String member;
+      if(getIsMember() == true){
+        member = "是";
+      }else{
+        member = "不是";
+      }
+
+      System.out.println("是否特別咨詢: " + special);
+      System.out.println("是否會員: " + member);
+      System.out.println("-------------------------");
+      
+      int total = 0;
+        
+      if(getIsSpecialAppointment() == true && getIsMember() == true){
+        total = (int)(Service.perSpecialDiagnosis * getNumberOfDiagnosis() * (1 - Service.memberDiscount));
+      }else if(getIsSpecialAppointment() == true && getIsMember() == false){
+        total = (int)(Service.perSpecialDiagnosis * getNumberOfDiagnosis());
+      }else if(getIsSpecialAppointment() == false && getIsMember() == false){
+        total = (int)(Service.perDiagnosis * getNumberOfDiagnosis());
+      }else if(getIsSpecialAppointment() == false && getIsMember() == true){
+        total = (int)(Service.perDiagnosis * getNumberOfDiagnosis() * (1 - Service.memberDiscount));
+      }else{
+        total =0;
+      }
+
+      System.out.println("咨詢費用: " + total);
+    }    
+}
+
+
+//-----------------------------------------------
+// 測試類別(已完成)
+//-----------------------------------------------
+class Main {
+    public static void main(String[] args) {    
+        //建立一個可存放多個物件的串列清單
+        ArrayList <Printable>arrayList = new ArrayList();
+        
+        //將多個「咨詢」物件加入串列清單中
+        arrayList.add(new Appointment("李小璇", 1, false, true));
+        arrayList.add(new Appointment("湯小婷", 2, true, false));
+        arrayList.add(new Appointment("李小和", 3, false, false));
+        arrayList.add(new Appointment("黃小瑄", 4, true, true));     
+		
+        //列印帳單	
+        for(int i=0; i<arrayList.size(); i++){            	
+            Printable t = (Printable)arrayList.get(i);             	
+            t.printBill();
+        } 		        
+    }
+}
+//------------------------------------------------------------------------------------------
