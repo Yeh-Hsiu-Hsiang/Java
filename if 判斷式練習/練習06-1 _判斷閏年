@@ -1,0 +1,21 @@
+練習06
+ (1)
+找出閏年(leap year)
+
+
+若一個西元年份 (可被400整除) 或是 (可被4整除 且 不可被100整除)
+則該年份稱為「閏年」(二月有29天); 否則稱為「平年」(二月有28天).
+印出西元1000年至9999年間之閏年, 並印出共有幾個閏年.
+
+
+class Main {
+    public static void main(String[] args) {
+        int cnt=0;
+        	for(int i =1000; i<=9999; i++){
+        		if(i%400==0 || (i%4==0 && i%100!=0))
+        			cnt++;
+        			System.out.println(i);}
+        	
+			System.out.println("共有閏年"+cnt+"個"); 
+    }
+}

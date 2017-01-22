@@ -1,0 +1,74 @@
+(4)
+輸入銷售金額及職等(字串),
+當職等是"A" 或 "B" 時,  
+    若銷售金額>10萬, 傭金是銷售金額的10%; 否則是6%. 
+當職等是"C" 或 "D" 時,  
+    若銷售金額>10萬, 傭金是銷售金額的9%; 否則是5%. 
+其他職等時,  
+    若銷售金額>10萬, 傭金是銷售金額的8%; 否則是4%. 	
+
+
+測試:
+職等A且銷售金額 250,000元, 傭金 __________________元
+職等A且銷售金額 150,000元, 傭金 __________________元
+職等A且銷售金額  50,000元, 傭金 __________________元	
+
+
+職等C且銷售金額 250,000元, 傭金 __________________元
+職等C且銷售金額 150,000元, 傭金 __________________元
+職等C且銷售金額  50,000元, 傭金 __________________元	
+
+
+職等E且銷售金額 250,000元, 傭金 __________________元
+職等E且銷售金額 150,000元, 傭金 __________________元
+職等E且銷售金額  50,000元, 傭金 __________________元	
+
+
+ (4)
+import java.util.*;
+
+
+class Main {
+	public static void main(String[] args) {
+        Scanner scanner=new Scanner(System.in);
+        double total;
+        String rank;
+        int ans;
+        
+        try{
+            System.out.print("請輸入銷售金額:");
+            total=Double.parseDouble(scanner.next().trim());
+            
+            System.out.print("請輸入職等:");
+            rank=scanner.next().trim();           
+        }catch(Exception e){
+            System.out.println("資料輸入錯誤!");
+            return;
+        }     
+
+
+       //---------------------------
+				
+		if (rank.equals("A") || rank.equals("B"))
+			if (total>100000)
+				ans =(int)Math.floor(total*0.1);
+			else 
+				ans = (int)Math.floor(total*0.06);
+		else if (rank.equals("C") || rank.equals("D"))
+			if (total>100000)
+				ans = (int)Math.floor(total *0.09);
+			else 
+				ans = (int)Math.floor(total * 0.05);
+		else 
+			if (total>100000)
+				ans = (int)Math.floor(total*0.08);
+			else
+				ans = (int)Math.floor(total *0.04);
+				
+		System.out.println(ans);
+		
+        //---------------------------
+    }
+}
+
+

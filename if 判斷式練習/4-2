@@ -1,0 +1,41 @@
+(2)
+輸入銷售金額,  
+若銷售金額>20萬, 傭金是銷售金額的10%;
+若銷售金額<=20萬且>10萬, 傭金是銷售金額的8%;
+否則是6%. 
+
+
+測試:
+銷售金額 250,000元, 傭金 __________________元
+銷售金額 150,000元, 傭金 __________________元
+銷售金額  50,000元, 傭金 __________________元
+
+
+(2)
+
+
+import java.util.*;
+
+
+class Main {
+	public static void main(String[] args) {
+        Scanner scanner=new Scanner(System.in);
+        double total;
+        int ans;
+        
+        try{
+            System.out.print("請輸入銷售金額:");
+            total=Double.parseDouble(scanner.next().trim());
+        }catch(Exception e){
+            System.out.println("資料輸入錯誤!");
+            return;
+        }     
+       		if (total>200000)
+				ans = (int)Math.floor(total * 0.1);
+			else if (total<=200000 && total>100000)
+				ans = (int)Math.floor(total * 0.08);
+			else
+				ans = (int)Math.floor(total * 0.06);
+					System.out.println(ans);
+    }
+}
